@@ -14,15 +14,31 @@ This project provides a microsimulation framework for analyzing how policy inter
 - Cost estimation and cost-effectiveness analysis
 - Plain-language reports
 
-## Quick Start - Proof of Concept
+## Quick Start
 
-### Installation
+### Option 1: Web Interface (Recommended)
 
 ```bash
 # Install dependencies
 pip install -r requirements.txt
 
-# Run proof of concept
+# Start the web server
+python app.py
+```
+
+Then open your browser to: **http://localhost:8000**
+
+The web interface provides:
+- Natural language policy input
+- Interactive results dashboard
+- Visualizations (bar charts of income distribution)
+- One-click example policies
+- Optional AI-powered parsing (requires Anthropic API key)
+
+### Option 2: Command Line (Proof of Concept)
+
+```bash
+# Run proof of concept script
 python proof_of_concept.py
 ```
 
@@ -44,9 +60,44 @@ Poverty Rate:
 Total Annual Cost: $208.12M
 ```
 
+## AI-Powered Policy Parsing (Optional)
+
+The simulator includes optional LLM-powered policy parsing using Claude API for more robust natural language understanding.
+
+### Setup
+
+1. Get an API key from: https://console.anthropic.com/
+2. Set environment variable:
+   ```bash
+   export ANTHROPIC_API_KEY='your-api-key-here'
+   ```
+3. In the web interface, check "Use AI-powered parsing"
+
+### Benefits of LLM Parsing
+
+- **More flexible language**: Understands variations like "give families $300 per kid each month"
+- **Better context**: Can extract complex policy details from longer descriptions
+- **Automatic classification**: Determines policy type and parameters intelligently
+- **Fallback**: Automatically falls back to rule-based parser if LLM fails
+
+The simple rule-based parser works well for basic queries and doesn't require an API key.
+
 ## What's Included
 
-### 1. Proof of Concept (`proof_of_concept.py`)
+### 1. Web Application (`app.py` + `static/`)
+
+A complete web interface for the inequality simulator:
+- **Backend**: FastAPI server with simulation API
+- **Frontend**: Clean, responsive HTML/CSS/JS interface
+- **Features**:
+  - Natural language policy input
+  - Real-time simulation (< 5 seconds)
+  - Interactive results dashboard
+  - Bar charts showing income distribution changes
+  - Downloadable results (via browser)
+  - Example policy library
+
+### 2. Proof of Concept (`proof_of_concept.py`)
 
 A complete, self-contained demonstration that:
 - Generates realistic simulated household data (50,000 households)
